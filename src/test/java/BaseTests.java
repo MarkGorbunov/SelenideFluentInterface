@@ -3,6 +3,8 @@ import com.codeborne.selenide.Selenide;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import config.Config;
+import config.manager.DriverManager;
 import steps.HomeSteps;
 
 public class BaseTests {
@@ -10,7 +12,9 @@ public class BaseTests {
 
     @BeforeTest
     protected void startUp() {
-        Selenide.open("http://www.uitestingplayground.com/");
+        DriverManager.setupBrowser();
+        String baseUrl = Config.getEnv().getProperty("baseUrl");
+        Selenide.open(baseUrl);
     }
 
     @AfterTest
